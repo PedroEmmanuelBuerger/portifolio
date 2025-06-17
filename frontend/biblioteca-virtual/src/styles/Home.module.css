@@ -1,0 +1,41 @@
+/* Home.module.css */
+.header {
+    background-color: #630000;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #111;
+    padding: 1rem;
+    color: white;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 2rem;
+  }
+  
+  .bookCard {
+    background-color: #292929;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #111;
+    margin-top: 2rem;
+    color: white;
+  }
+  
