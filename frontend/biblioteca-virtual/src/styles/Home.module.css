@@ -1,11 +1,12 @@
 /* Home.module.css */
 .header {
-    background-color: #630000;
-    padding: 1rem 2rem;
+    background-color: #15dbdb;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
+    padding: 1rem 2rem;
+    height: 40px;
   }
   
   .container {
@@ -14,7 +15,7 @@
   
   .sidebar {
     width: 250px;
-    background-color: #111;
+    background-color: #2b2a2a;
     padding: 1rem;
     color: white;
   }
@@ -25,17 +26,22 @@
   }
   
   .bookCard {
-    background-color: #292929;
+    background-color: #2b2a2a;
     padding: 1rem;
     margin-bottom: 1.5rem;
     border-radius: 8px;
   }
   
   .footer {
+    background-color: #15dbdb;
+    color: white;
     text-align: center;
     padding: 1rem;
-    background-color: #111;
-    margin-top: 2rem;
-    color: white;
+    position: fixed;
+    font-size: 0.9rem;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
   }
   

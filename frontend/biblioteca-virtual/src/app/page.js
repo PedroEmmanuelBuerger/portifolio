@@ -44,7 +44,8 @@ export default function Home() {
       </div>
 
       <footer className={styles.footer}>
-        <p>Feito com carinho por Pedro Emmanuel 💛</p>
+        <p>Biblioteca Virtual - Domínio Público</p>
+        <p>© 2023 Todos os direitos reservados.</p>
       </footer>
     </div>
   );
