@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Header from "../components/Header";
+import HeroSection from "../components/HeroSection";
+import SkillsSection from "../components/SkillsSection";
 
 // Ícones SVG para stacks principais e secundáriasb
 
@@ -319,85 +322,13 @@ export default function Home() {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8">
       {/* Navegação fixa */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex gap-8 bg-white/10 dark:bg-black/30 glass px-12 py-3 rounded-full shadow-lg backdrop-blur-md border border-white/20 animate-fade-in">
-        {navLinks.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            className="text-lg font-semibold text-white hover:text-blue-300 transition-colors duration-200 tracking-wide"
-          >
-            {link.name}
-          </a>
-        ))}
-      </nav>
+      <Header navLinks={navLinks} />
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center min-h-[80vh] w-full fade-in mb-32 pt-24" id="sobre">
-        <div ref={el => { heroRefs.current[0] = el; }} className="relative mb-12 opacity-0 slide-out">
-          <span className="absolute -inset-4 rounded-full bg-gradient-to-tr from-blue-400 via-cyan-400 to-indigo-500 blur-2xl opacity-60 animate-pulse" />
-          <Image
-            src="https://media.licdn.com/dms/image/v2/D4D03AQG4HtjVhD5BzQ/profile-displayphoto-shrink_800_800/B4DZbOxGEFIAAc-/0/1747225699017?e=1756339200&v=beta&t=gjGvxbXXVGUd3D-gKhTG81sYtzXBW9kZVqXjQFGjVZI"
-            alt="Pedro Emmanuel Buerger"
-            width={240}
-            height={240}
-            className="rounded-full border-8 border-blue-400 avatar-glow relative z-10 shadow-2xl"
-            priority
-          />
-        </div>
-        <div ref={el => { heroRefs.current[1] = el; }} className="flex flex-col items-center opacity-0 slide-out">
-          <h1 className="text-6xl sm:text-7xl font-extrabold text-white drop-shadow-lg mb-6 tracking-tight animate-fadeInUp animate-delay-200">Pedro Emmanuel Buerger</h1>
-          <h2 className="text-3xl sm:text-4xl font-medium text-blue-200 mb-10 animate-fadeInUp animate-delay-400">System Developer | Web & HR Tech | HCM ERP</h2>
-          <p className="max-w-2xl text-center text-2xl text-white/90 mb-6 animate-fadeInUp animate-delay-600 text-justify">
-            Sou apaixonado por tecnologia, design e comunicação. Atuo como desenvolvedor de sistemas, com experiência em consultoria para sistemas de RH, desenvolvimento web e design gráfico. Busco sempre unir criatividade, eficiência e inovação em cada projeto.
-          </p>
-          <p className="max-w-xl text-center text-xl text-blue-100 animate-fadeInUp animate-delay-800 mb-2 text-justify">
-            Atualmente focado em <b>ERP</b>, <b>Cyber Security</b>, <b>LSP</b> e <b>Arduino</b>. Minha trajetória inclui transição de carreira do design para o desenvolvimento, trazendo uma visão multidisciplinar para soluções digitais.
-          </p>
-        </div>
-      </section>
+      <HeroSection heroRefs={heroRefs} />
 
       {/* Skills - Stacks principais com ícones, descrição e projetos */}
-      <section className="w-full max-w-3xl mb-40 fade-in-up pt-12" id="skills">
-        <h3 className="text-4xl font-bold text-white mb-16 text-center tracking-wide animate-fadeInUp animate-delay-0">Stacks & Projetos</h3>
-        <div className="flex flex-col items-center gap-8">
-          {stackData.map((stack, i) => (
-            <div
-              key={stack.name}
-              ref={el => { stackRefs.current[i] = el; }}
-              className={`w-full flex flex-row items-center gap-4 glass p-6 rounded-2xl shadow-xl border-2 border-white/20 bg-gradient-to-br ${stack.color} fade-in-up hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 opacity-0 slide-out`}
-            >
-              <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                <div className="mb-1">
-                  <span className="block w-14 h-14">{stack.icon}</span>
-                </div>
-                <span className="text-xs text-blue-100 font-mono mt-1">{stack.experience}</span>
-              </div>
-              <div className="flex flex-col gap-1 flex-1">
-                <span className="font-mono font-extrabold text-2xl sm:text-3xl text-white drop-shadow-xl tracking-widest uppercase mb-1">{stack.name}</span>
-                <span className="text-sm text-white/90 mb-1 font-sans">{stack.description}</span>
-                <span className="text-base text-blue-200 mb-1 font-semibold font-sans">Nível: {stack.level}</span>
-                <span className="text-sm text-blue-100 mb-2 font-sans italic">{stack.related}</span>
-                {stack.projects && stack.projects.length > 0 && (
-                  <div className="flex flex-col gap-1 mt-1">
-                    <span className="text-sm text-blue-100 font-semibold">Projetos:</span>
-                    {stack.projects.map((proj) => (
-                      <a
-                        key={proj.url}
-                        href={proj.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-200 underline hover:text-blue-400 transition-colors text-sm"
-                      >
-                        {proj.name}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <SkillsSection stackData={stackData} stackRefs={stackRefs} />
 
       {/* Experiência Profissional - cards grandes, espaçados, detalhados, animados */}
       <section className="w-full max-w-3xl mb-40 fade-in-up pt-12" id="experiencia">
