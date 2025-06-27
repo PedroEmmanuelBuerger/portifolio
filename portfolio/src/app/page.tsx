@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Ícones SVG para stacks principais e secundáriasb
 
@@ -18,7 +18,6 @@ const stackData = [
     projects: [
       { name: "Online-Store", url: "https://github.com/PedroEmmanuelBuerger/Online-Store" },
       { name: "recipes-app", url: "https://github.com/PedroEmmanuelBuerger/recipes-app" },
-      { name: "deburguer", url: "https://github.com/PedrooSilvaa/deburguer" },
     ],
   },
   {
@@ -175,6 +174,8 @@ const navLinks = [
   { name: "Sobre", href: "#sobre" },
   { name: "Skills", href: "#skills" },
   { name: "Experiência", href: "#experiencia" },
+  { name: "Certificados", href: "#certificados" },
+  { name: "Idiomas", href: "#idiomas" },
   { name: "Contato", href: "#contato" },
 ];
 
@@ -233,6 +234,14 @@ const experiences = [
   },
 ];
 
+type Certificado = {
+  titulo: string;
+  org: string;
+  periodo: string;
+  competencias: string;
+  descricao: string;
+};
+
 export default function Home() {
   // Navegação suave
   useEffect(() => {
@@ -255,6 +264,8 @@ export default function Home() {
   const contactRefs = useRef<(HTMLDivElement | null)[]>([]);
   const heroRefs = useRef<(HTMLDivElement | null)[]>([]); // [0]=foto, [1]=texto
   const experiencesRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const certificadosRefs = useRef<(HTMLElement | null)[]>([]);
+  const idiomasRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
@@ -271,20 +282,35 @@ export default function Home() {
       },
       { threshold: 0.6 }
     );
-    stackRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-    contactRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-    heroRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-    experiencesRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+    stackRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    contactRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    heroRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    experiencesRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    certificadosRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    idiomasRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
     return () => observer.disconnect();
   }, []);
+
+  // Estado para modal de certificado
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalCert, setModalCert] = useState<Certificado | null>(null);
+
+  // Fechar modal com ESC ou clique fora
+  useEffect(() => {
+    if (!modalOpen) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setModalOpen(false);
+    }
+    function handleClick(e: MouseEvent) {
+      if ((e.target as HTMLElement).id === "cert-modal-bg") setModalOpen(false);
+    }
+    window.addEventListener("keydown", handleKey);
+    window.addEventListener("mousedown", handleClick);
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("mousedown", handleClick);
+    };
+  }, [modalOpen]);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8">
@@ -316,7 +342,7 @@ export default function Home() {
         </div>
         <div ref={el => { heroRefs.current[1] = el; }} className="flex flex-col items-center opacity-0 slide-out">
           <h1 className="text-6xl sm:text-7xl font-extrabold text-white drop-shadow-lg mb-6 tracking-tight animate-fadeInUp animate-delay-200">Pedro Emmanuel Buerger</h1>
-          <h2 className="text-3xl sm:text-4xl font-medium text-blue-200 mb-10 animate-fadeInUp animate-delay-400">System Developer | Web & HR Tech | Design & Comunicação</h2>
+          <h2 className="text-3xl sm:text-4xl font-medium text-blue-200 mb-10 animate-fadeInUp animate-delay-400">System Developer | Web & HR Tech | HCM ERP</h2>
           <p className="max-w-2xl text-center text-2xl text-white/90 mb-6 animate-fadeInUp animate-delay-600 text-justify">
             Sou apaixonado por tecnologia, design e comunicação. Atuo como desenvolvedor de sistemas, com experiência em consultoria para sistemas de RH, desenvolvimento web e design gráfico. Busco sempre unir criatividade, eficiência e inovação em cada projeto.
           </p>
@@ -397,6 +423,137 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Certificados - penúltima seção */}
+      <section className="w-full max-w-3xl mb-40 fade-in-up pt-12" id="certificados">
+        <h3 className="text-4xl font-bold text-white mb-10 text-center tracking-wide animate-fadeInUp animate-delay-0">Certificados</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {[
+            {
+              titulo: 'Certificação Técnica - SQL',
+              org: 'Senior Sistemas',
+              periodo: 'mar de 2025 - jun de 2026',
+              competencias: 'SQL, Microsoft SQL Server, MySQL, PL/SQL',
+              descricao: 'Certificação técnica em SQL, abrangendo bancos relacionais.',
+            },
+            {
+              titulo: 'Metodologia de Vendas Consultivas de Alta Performance',
+              org: 'Mercado Consultoria',
+              periodo: 'dez de 2024',
+              competencias: 'MVC-AP',
+              descricao: 'Curso de vendas consultivas com foco em alta performance.',
+            },
+            {
+              titulo: 'Módulo - Desenvolvimento em Back End',
+              org: 'Trybe',
+              periodo: 'ago de 2023',
+              competencias: 'Mocha, Banco de dados, Python, SQL, C#',
+              descricao: 'Módulo de desenvolvimento backend com múltiplas tecnologias.',
+            },
+            {
+              titulo: 'Módulo - Front-End',
+              org: 'Trybe',
+              periodo: 'abr de 2023',
+              competencias: 'JavaScript, ReactJS, TypeScript, Redux',
+              descricao: 'Módulo de desenvolvimento front-end.',
+            },
+            {
+              titulo: 'Módulo de Fundamentos do Desenvolvimento Web',
+              org: 'Trybe',
+              periodo: 'dez de 2022',
+              competencias: 'HTML5, CSS, Git, Linux',
+              descricao: 'Fundamentos essenciais para desenvolvimento web.',
+            },
+            {
+              titulo: 'Marketing digital e Design Gráfico',
+              org: 'SENAI/SC',
+              periodo: 'nov de 2020',
+              competencias: 'Design Gráfico',
+              descricao: 'Curso de marketing digital e design gráfico.',
+            },
+            {
+              titulo: 'Certificação Técnica - Linguagem LSP',
+              org: 'Senior Sistemas',
+              periodo: 'jun de 2024 - jun de 2025',
+              competencias: 'Banco de dados, LSP',
+              descricao: 'Certificação técnica em linguagem LSP.',
+            },
+            {
+              titulo: 'Certificação Técnica - Importador/Exportador',
+              org: 'Senior Sistemas',
+              periodo: 'jun de 2024 - jun de 2025',
+              competencias: 'Programação, Desenvolvimento de software',
+              descricao: 'Certificação técnica em importação/exportação.',
+            },
+            {
+              titulo: 'Certificação técnica - Gerador de relatórios',
+              org: 'Senior Sistemas',
+              periodo: 'jun de 2024 - jun de 2025',
+              competencias: 'Programação, Desenvolvimento de software',
+              descricao: 'Certificação técnica em geração de relatórios.',
+            },
+          ].map((cert, i) => (
+            <div
+              key={i}
+              ref={el => { certificadosRefs.current[i] = el; }}
+              className="glass rounded-2xl shadow-xl border-2 border-white/20 bg-black/30 flex flex-col items-center p-6 opacity-0 slide-out"
+            >
+              <div className="w-full flex flex-row items-center gap-4 mb-4">
+                <Image
+                  src="/window.svg"
+                  alt={cert.titulo}
+                  width={80}
+                  height={60}
+                  className="rounded shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
+                  onClick={() => { setModalCert(cert); setModalOpen(true); }}
+                />
+                <div className="flex flex-col">
+                  <span className="text-lg font-bold text-white">{cert.titulo}</span>
+                  <span className="text-blue-100 text-base">{cert.org}</span>
+                  <span className="text-blue-200 text-sm">{cert.periodo}</span>
+                </div>
+              </div>
+              <span className="text-blue-100 text-base mb-2">{cert.competencias}</span>
+              <span className="text-white/90 text-sm mb-2 text-justify">{cert.descricao}</span>
+            </div>
+          ))}
+        </div>
+        {/* Modal de imagem expandida com animação fadeInUp (como antes) */}
+        {modalOpen && (
+          <div id="cert-modal-bg" className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 animate-fadeInUp" style={{animationDuration: '0.3s'}}>
+            <div className="relative max-w-2xl w-full flex flex-col items-center animate-fadeInUp" style={{animationDuration: '0.3s'}}>
+              <Image
+                src="/window.svg"
+                alt={modalCert?.titulo ?? ''}
+                width={600}
+                height={400}
+                className="rounded-xl shadow-2xl border-4 border-white/20"
+              />
+              <span className="mt-4 text-white text-lg font-bold text-center">{modalCert?.titulo}</span>
+              <span className="text-blue-100 text-base text-center">{modalCert?.org} - {modalCert?.periodo}</span>
+              <span className="text-blue-200 text-sm text-center mb-2">{modalCert?.competencias}</span>
+              <span className="text-white/90 text-sm text-center">{modalCert?.descricao}</span>
+              <button onClick={() => setModalOpen(false)} className="absolute top-2 right-2 text-white text-2xl font-bold bg-black/40 rounded-full px-3 py-1 hover:bg-black/70 transition">×</button>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* Idiomas - antes do rodapé */}
+      <section ref={el => { idiomasRefs.current[0] = el; }} className="w-full max-w-2xl mb-32 fade-in-up pt-12 opacity-0 slide-out" id="idiomas">
+        <h3 className="text-4xl font-bold text-white mb-10 text-center tracking-wide animate-fadeInUp animate-delay-0">Idiomas</h3>
+        <div className="flex flex-col gap-6 bg-black/30 glass p-8 rounded-2xl shadow-2xl border-2 border-white/20">
+          <div className="flex flex-col">
+            <span className="text-xl font-bold text-white">English</span>
+            <span className="text-blue-100 text-base">Nível avançado</span>
+          </div>
+          <hr className="my-2 border-white/10" />
+          <div className="flex flex-col">
+            <span className="text-xl font-bold text-white">Português</span>
+            <span className="text-blue-100 text-base">Fluente ou nativo</span>
+          </div>
         </div>
       </section>
 
