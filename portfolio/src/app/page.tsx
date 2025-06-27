@@ -338,7 +338,7 @@ export default function Home() {
             <div
               key={exp.title + exp.company}
               ref={el => { experiencesRefs.current[i] = el; }}
-              className={`w-full glass p-8 rounded-2xl shadow-2xl border-2 ${exp.color} fade-in-up opacity-0 slide-out`}
+              className={`w-full glass p-8 rounded-2xl shadow-2xl border-2 ${exp.color} fade-in-up opacity-0 slide-out hover:scale-[1.02] hover:shadow-2xl transition-all duration-300`}
               style={{ animationDelay: `${i * 180}ms` }}
             >
               <div className="flex flex-col gap-2">
@@ -366,7 +366,7 @@ export default function Home() {
         <h3 className="text-4xl font-bold text-white mb-16 text-center tracking-wide animate-fadeInUp animate-delay-0">Escolaridade</h3>
         <div className="flex flex-col gap-12">
           {/* Estácio */}
-          <div ref={el => { escolaridadeRefs.current[0] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-blue-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start">
+          <div ref={el => { escolaridadeRefs.current[0] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-blue-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start hover:scale-[1.02] hover:shadow-2xl transition-all duration-300">
             <div className="flex-shrink-0 flex flex-col items-center">
               <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Est%C3%A1cio_logo.png" alt="Estácio" className="w-16 h-16 object-contain mb-2" />
             </div>
@@ -383,7 +383,7 @@ export default function Home() {
             </div>
           </div>
           {/* Trybe */}
-          <div ref={el => { escolaridadeRefs.current[1] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-green-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start">
+          <div ref={el => { escolaridadeRefs.current[1] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-green-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start hover:scale-[1.02] hover:shadow-2xl transition-all duration-300">
             <div className="flex-shrink-0 flex flex-col items-center">
               <img src="https://avatars.githubusercontent.com/u/44980439?s=200&v=4" alt="Trybe" className="w-16 h-16 object-contain mb-2" />
             </div>
@@ -400,7 +400,7 @@ export default function Home() {
             </div>
           </div>
           {/* CEDUP Hermann Hering */}
-          <div ref={el => { escolaridadeRefs.current[2] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-gray-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start">
+          <div ref={el => { escolaridadeRefs.current[2] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-gray-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start hover:scale-[1.02] hover:shadow-2xl transition-all duration-300">
             <div className="flex-shrink-0 flex flex-col items-center">
               <img src="https://www.ceduphh.com.br/wp-content/uploads/2019/10/logo-cedup.png" alt="CEDUP Hermann Hering" className="w-16 h-16 object-contain mb-2" />
             </div>
@@ -492,7 +492,7 @@ export default function Home() {
             <div
               key={i}
               ref={el => { certificadosRefs.current[i] = el; }}
-              className="glass rounded-2xl shadow-xl border-2 border-white/20 bg-black/30 flex flex-col items-center p-6 opacity-0 slide-out"
+              className="glass rounded-2xl shadow-xl border-2 border-white/20 bg-black/30 flex flex-col items-center p-6 opacity-0 slide-out fade-in-up hover:scale-[1.02] hover:shadow-2xl transition-all duration-300"
             >
               <div className="w-full flex flex-row items-center gap-4 mb-4">
                 <Image
@@ -553,17 +553,17 @@ export default function Home() {
 
       {/* Rodapé estilizado: apenas ícones, cards coloridos, alinhados lado a lado, animação */}
       <section className="w-full max-w-2xl mb-20 fade-in-up pt-12 flex flex-wrap justify-center gap-8" id="contato">
-        <div ref={el => { contactRefs.current[0] = el; }} className="border-2 border-green-500 shadow-2xl rounded-2xl px-5 py-5 flex flex-col items-center justify-center bg-green-600/80 min-w-[80px] opacity-0 slide-out transition-all hover:scale-110">
+        <div ref={el => { contactRefs.current[0] = el; }} className="border-2 border-green-500 shadow-2xl rounded-2xl px-5 py-5 flex flex-col items-center justify-center bg-green-600/80 min-w-[80px] opacity-0 slide-out transition-all hover:scale-[1.02] hover:shadow-2xl duration-300">
           <a href="mailto:pedroemmanuelbuerger@gmail.com" className="flex flex-col items-center justify-center">
             <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24" className="text-white mb-1"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20V8.99l8 7 8-7V20H4z"/></svg>
           </a>
         </div>
-        <div ref={el => { contactRefs.current[1] = el; }} className="border-2 border-gray-400 shadow-2xl rounded-2xl px-5 py-5 flex flex-col items-center justify-center bg-gray-700/80 min-w-[80px] opacity-0 slide-out transition-all hover:scale-110">
+        <div ref={el => { contactRefs.current[1] = el; }} className="border-2 border-gray-400 shadow-2xl rounded-2xl px-5 py-5 flex flex-col items-center justify-center bg-gray-700/80 min-w-[80px] opacity-0 slide-out transition-all hover:scale-[1.02] hover:shadow-2xl duration-300">
           <a href="https://github.com/PedroEmmanuelBuerger" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center">
             <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24" className="text-white mb-1"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .267.18.577.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
           </a>
         </div>
-        <div ref={el => { contactRefs.current[2] = el; }} className="border-2 border-blue-600 shadow-2xl rounded-2xl px-5 py-5 flex flex-col items-center justify-center bg-blue-700/80 min-w-[80px] opacity-0 slide-out transition-all hover:scale-110">
+        <div ref={el => { contactRefs.current[2] = el; }} className="border-2 border-blue-600 shadow-2xl rounded-2xl px-5 py-5 flex flex-col items-center justify-center bg-blue-700/80 min-w-[80px] opacity-0 slide-out transition-all hover:scale-[1.02] hover:shadow-2xl duration-300">
           <a href="https://www.linkedin.com/in/pedroemmanuelbuerger/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center">
             <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24" className="text-white mb-1"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.966 0-1.75-.79-1.75-1.76 0-.97.784-1.76 1.75-1.76s1.75.79 1.75 1.76c0 .97-.784 1.76-1.75 1.76zm13.5 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z"/></svg>
           </a>
