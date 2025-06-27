@@ -174,6 +174,7 @@ const navLinks = [
   { name: "Sobre", href: "#sobre" },
   { name: "Skills", href: "#skills" },
   { name: "Experiência", href: "#experiencia" },
+  { name: "Escolaridade", href: "#escolaridade" },
   { name: "Certificados", href: "#certificados" },
   { name: "Idiomas", href: "#idiomas" },
   { name: "Contato", href: "#contato" },
@@ -240,6 +241,7 @@ type Certificado = {
   periodo: string;
   competencias: string;
   descricao: string;
+  imagem?: string;
 };
 
 export default function Home() {
@@ -266,6 +268,7 @@ export default function Home() {
   const experiencesRefs = useRef<(HTMLDivElement | null)[]>([]);
   const certificadosRefs = useRef<(HTMLElement | null)[]>([]);
   const idiomasRefs = useRef<(HTMLElement | null)[]>([]);
+  const escolaridadeRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
@@ -288,6 +291,7 @@ export default function Home() {
     experiencesRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
     certificadosRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
     idiomasRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
+    escolaridadeRefs.current.forEach((ref) => { if (ref) observer.observe(ref); });
     return () => observer.disconnect();
   }, []);
 
@@ -354,35 +358,35 @@ export default function Home() {
 
       {/* Skills - Stacks principais com ícones, descrição e projetos */}
       <section className="w-full max-w-3xl mb-40 fade-in-up pt-12" id="skills">
-        <h3 className="text-4xl font-bold text-white mb-16 text-center tracking-wide animate-fadeInUp animate-delay-0">Stacks & Skills</h3>
-        <div className="flex flex-col items-center gap-16">
+        <h3 className="text-4xl font-bold text-white mb-16 text-center tracking-wide animate-fadeInUp animate-delay-0">Stacks & Projetos</h3>
+        <div className="flex flex-col items-center gap-8">
           {stackData.map((stack, i) => (
             <div
               key={stack.name}
               ref={el => { stackRefs.current[i] = el; }}
-              className={`w-full flex flex-row items-center gap-8 glass p-10 rounded-3xl shadow-2xl border-4 border-white/30 bg-gradient-to-br ${stack.color} fade-in-up hover:scale-[1.03] hover:shadow-3xl transition-all duration-300 opacity-0 slide-out`}
+              className={`w-full flex flex-row items-center gap-4 glass p-6 rounded-2xl shadow-xl border-2 border-white/20 bg-gradient-to-br ${stack.color} fade-in-up hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 opacity-0 slide-out`}
             >
               <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                <div className="mb-2">
-                  <span className="block w-20 h-20">{stack.icon}</span>
+                <div className="mb-1">
+                  <span className="block w-14 h-14">{stack.icon}</span>
                 </div>
                 <span className="text-xs text-blue-100 font-mono mt-1">{stack.experience}</span>
               </div>
-              <div className="flex flex-col gap-2 flex-1">
-                <span className="font-mono font-extrabold text-3xl sm:text-4xl text-white drop-shadow-xl tracking-widest uppercase mb-1">{stack.name}</span>
-                <span className="text-base text-white/90 mb-1 font-sans">{stack.description}</span>
-                <span className="text-lg text-blue-200 mb-1 font-semibold font-sans">Nível: {stack.level}</span>
-                <span className="text-base text-blue-100 mb-2 font-sans italic">{stack.related}</span>
+              <div className="flex flex-col gap-1 flex-1">
+                <span className="font-mono font-extrabold text-2xl sm:text-3xl text-white drop-shadow-xl tracking-widest uppercase mb-1">{stack.name}</span>
+                <span className="text-sm text-white/90 mb-1 font-sans">{stack.description}</span>
+                <span className="text-base text-blue-200 mb-1 font-semibold font-sans">Nível: {stack.level}</span>
+                <span className="text-sm text-blue-100 mb-2 font-sans italic">{stack.related}</span>
                 {stack.projects && stack.projects.length > 0 && (
-                  <div className="flex flex-col gap-1 mt-2">
-                    <span className="text-base text-blue-100 font-semibold">Projetos:</span>
+                  <div className="flex flex-col gap-1 mt-1">
+                    <span className="text-sm text-blue-100 font-semibold">Projetos:</span>
                     {stack.projects.map((proj) => (
                       <a
                         key={proj.url}
                         href={proj.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-200 underline hover:text-blue-400 transition-colors text-base"
+                        className="text-blue-200 underline hover:text-blue-400 transition-colors text-sm"
                       >
                         {proj.name}
                       </a>
@@ -426,6 +430,64 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Escolaridade */}
+      <section className="w-full max-w-3xl mb-40 fade-in-up pt-12" id="escolaridade">
+        <h3 className="text-4xl font-bold text-white mb-16 text-center tracking-wide animate-fadeInUp animate-delay-0">Escolaridade</h3>
+        <div className="flex flex-col gap-12">
+          {/* Estácio */}
+          <div ref={el => { escolaridadeRefs.current[0] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-blue-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 flex flex-col items-center">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Est%C3%A1cio_logo.png" alt="Estácio" className="w-16 h-16 object-contain mb-2" />
+            </div>
+            <div className="flex-1">
+              <span className="font-bold text-2xl text-white drop-shadow-lg">Estácio</span>
+              <span className="block text-lg text-blue-200 mb-1">Tecnólogo, Análise e Desenvolvimento de Sistemas</span>
+              <span className="block text-base text-blue-100 mb-2">out de 2023 - out de 2026</span>
+              <p className="text-white/90 mb-2 text-justify">A Universidade Estácio de Sá (UNESA) é uma universidade privada brasileira fundada em 1970. Curso focado em desenvolvimento de software, computação em nuvem, segurança da informação, hardware, SQL, programação e ciência da computação.</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["Python", "Java", "SQL", "Programação", "Ciência da computação", "Desenvolvimento de software"].map((skill) => (
+                  <span key={skill} className="bg-blue-900/60 text-blue-100 px-3 py-1 rounded-full text-sm font-semibold">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Trybe */}
+          <div ref={el => { escolaridadeRefs.current[1] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-green-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 flex flex-col items-center">
+              <img src="https://avatars.githubusercontent.com/u/44980439?s=200&v=4" alt="Trybe" className="w-16 h-16 object-contain mb-2" />
+            </div>
+            <div className="flex-1">
+              <span className="font-bold text-2xl text-white drop-shadow-lg">Trybe</span>
+              <span className="block text-lg text-blue-200 mb-1">Desenvolvimento Web</span>
+              <span className="block text-base text-blue-100 mb-2">ago de 2022 - set de 2023</span>
+              <p className="text-white/90 mb-2 text-justify">A Trybe é uma escola de tecnologia com formação intensiva em desenvolvimento web, front-end, back-end, ciência da computação, metodologias ágeis e habilidades comportamentais.</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["CSS", "Python", "Linux", "Git", "Java", "SQL", "Node.js", "React", "TypeScript", "HTML5", "Docker", "Desenvolvimento full stack"].map((skill) => (
+                  <span key={skill} className="bg-green-900/60 text-green-100 px-3 py-1 rounded-full text-sm font-semibold">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* CEDUP Hermann Hering */}
+          <div ref={el => { escolaridadeRefs.current[2] = el; }} className="glass p-8 rounded-2xl shadow-2xl border-2 border-gray-400 fade-in-up opacity-0 slide-out flex flex-col sm:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 flex flex-col items-center">
+              <img src="https://www.ceduphh.com.br/wp-content/uploads/2019/10/logo-cedup.png" alt="CEDUP Hermann Hering" className="w-16 h-16 object-contain mb-2" />
+            </div>
+            <div className="flex-1">
+              <span className="font-bold text-2xl text-white drop-shadow-lg">CEDUP Hermann Hering</span>
+              <span className="block text-lg text-blue-200 mb-1">Programação de Computadores</span>
+              <span className="block text-base text-blue-100 mb-2">jan de 2017 - dez de 2020</span>
+              <p className="text-white/90 mb-2 text-justify">Curso técnico profissionalizante com foco em sistemas operacionais, lógica de programação, arquitetura de software e desenvolvimento de aplicações.</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["Pascal", "SQL", "Programação", "Arquitetura de software"].map((skill) => (
+                  <span key={skill} className="bg-gray-900/60 text-gray-100 px-3 py-1 rounded-full text-sm font-semibold">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Certificados - penúltima seção */}
       <section className="w-full max-w-3xl mb-40 fade-in-up pt-12" id="certificados">
         <h3 className="text-4xl font-bold text-white mb-10 text-center tracking-wide animate-fadeInUp animate-delay-0">Certificados</h3>
@@ -437,6 +499,7 @@ export default function Home() {
               periodo: 'mar de 2025 - jun de 2026',
               competencias: 'SQL, Microsoft SQL Server, MySQL, PL/SQL',
               descricao: 'Certificação técnica em SQL, abrangendo bancos relacionais.',
+              imagem: 'https://media.licdn.com/dms/image/v2/D4D2DAQEB0ipiJg5iAg/profile-treasury-document-images_800/B4DZW46r6DHYAk-/1/1742564149713?e=1752105600&v=beta&t=aUUeBZnpnRO82TITt8o7PoSJLGKy9FNINS_xFnqU7Pg'
             },
             {
               titulo: 'Metodologia de Vendas Consultivas de Alta Performance',
@@ -444,6 +507,7 @@ export default function Home() {
               periodo: 'dez de 2024',
               competencias: 'MVC-AP',
               descricao: 'Curso de vendas consultivas com foco em alta performance.',
+              imagem: 'https://media.licdn.com/dms/image/v2/D4D2DAQGGgft6yB1t7Q/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1733944926685?e=1752105600&v=beta&t=BA3nCsTlJA2Dn-GqVxtJT1d8YcxfO1CSgkNaJEzaQP0'
             },
             {
               titulo: 'Módulo - Desenvolvimento em Back End',
@@ -451,6 +515,7 @@ export default function Home() {
               periodo: 'ago de 2023',
               competencias: 'Mocha, Banco de dados, Python, SQL, C#',
               descricao: 'Módulo de desenvolvimento backend com múltiplas tecnologias.',
+              imagem: 'https://media.discordapp.net/attachments/543280039525875753/1388197743910064376/image.png?ex=68601b65&is=685ec9e5&hm=abe1cc7f1a59939111ee0d045f829759b9f076280a8c999b4c6f6ec05742007c&=&format=webp&quality=lossless'
             },
             {
               titulo: 'Módulo - Front-End',
@@ -458,6 +523,7 @@ export default function Home() {
               periodo: 'abr de 2023',
               competencias: 'JavaScript, ReactJS, TypeScript, Redux',
               descricao: 'Módulo de desenvolvimento front-end.',
+              imagem: 'https://media.licdn.com/dms/image/v2/D4D22AQFz5nDS9ki2kg/feedshare-shrink_800/feedshare-shrink_800/0/1680621429360?e=1753920000&v=beta&t=taNIhfXZTe54DeZBDtcXX4jmoDSZyXhJpOb8oMPMMMk'
             },
             {
               titulo: 'Módulo de Fundamentos do Desenvolvimento Web',
@@ -465,13 +531,7 @@ export default function Home() {
               periodo: 'dez de 2022',
               competencias: 'HTML5, CSS, Git, Linux',
               descricao: 'Fundamentos essenciais para desenvolvimento web.',
-            },
-            {
-              titulo: 'Marketing digital e Design Gráfico',
-              org: 'SENAI/SC',
-              periodo: 'nov de 2020',
-              competencias: 'Design Gráfico',
-              descricao: 'Curso de marketing digital e design gráfico.',
+              imagem: 'https://media.licdn.com/dms/image/v2/C4D22AQG1dJMy2r7itA/feedshare-shrink_800/feedshare-shrink_800/0/1670522421921?e=1753920000&v=beta&t=GVGWPFNNSnh1pi-V3_xdPS3SRWdTuBzNlcuwb5RrLIc'
             },
             {
               titulo: 'Certificação Técnica - Linguagem LSP',
@@ -479,6 +539,7 @@ export default function Home() {
               periodo: 'jun de 2024 - jun de 2025',
               competencias: 'Banco de dados, LSP',
               descricao: 'Certificação técnica em linguagem LSP.',
+              imagem: 'https://media.licdn.com/dms/image/v2/D4D2DAQEUPcPjoZAzTg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1724085178808?e=1752105600&v=beta&t=bnMJ7yR3pJ4Cv_6Sn7MYgtzlAAigkGq25k5JnYsU41I'
             },
             {
               titulo: 'Certificação Técnica - Importador/Exportador',
@@ -486,6 +547,7 @@ export default function Home() {
               periodo: 'jun de 2024 - jun de 2025',
               competencias: 'Programação, Desenvolvimento de software',
               descricao: 'Certificação técnica em importação/exportação.',
+              imagem: 'https://media.licdn.com/dms/image/v2/D4D2DAQFeCfgZzD99Hw/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1724085248826?e=1752105600&v=beta&t=74f3Pvi0LnLbDyr5aZvymsyuA9uizylXxmT4m5-8n2I'
             },
             {
               titulo: 'Certificação técnica - Gerador de relatórios',
@@ -493,6 +555,7 @@ export default function Home() {
               periodo: 'jun de 2024 - jun de 2025',
               competencias: 'Programação, Desenvolvimento de software',
               descricao: 'Certificação técnica em geração de relatórios.',
+              imagem: 'https://media.licdn.com/dms/image/v2/D4D2DAQGCgkGekVBahg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1724085043641?e=1752105600&v=beta&t=O1O7ZmgSu4VFxq1pqPk9o4a5wRVdPjks_rWTwC5NUc4'
             },
           ].map((cert, i) => (
             <div
@@ -502,7 +565,7 @@ export default function Home() {
             >
               <div className="w-full flex flex-row items-center gap-4 mb-4">
                 <Image
-                  src="/window.svg"
+                  src={cert.imagem || "/window.svg"}
                   alt={cert.titulo}
                   width={80}
                   height={60}
@@ -525,10 +588,10 @@ export default function Home() {
           <div id="cert-modal-bg" className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 animate-fadeInUp" style={{animationDuration: '0.3s'}}>
             <div className="relative max-w-2xl w-full flex flex-col items-center animate-fadeInUp" style={{animationDuration: '0.3s'}}>
               <Image
-                src="/window.svg"
+                src={modalCert?.imagem || "/window.svg"}
                 alt={modalCert?.titulo ?? ''}
-                width={600}
-                height={400}
+                width={800}
+                height={600}
                 className="rounded-xl shadow-2xl border-4 border-white/20"
               />
               <span className="mt-4 text-white text-lg font-bold text-center">{modalCert?.titulo}</span>
